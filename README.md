@@ -9,17 +9,27 @@ no satisfying way of extensively testing your contracts.
 
 This project aims to provide a simple way of testing your contracts using Mocha and StarknetJS. While not ideal (extremely slow), it is just temporary and hopefully can be migrated into a more convenient solution soon. Hopefully, the work done by Dojo on [Katana](https://github.com/dojoengine/katana) will help improve performance.
 
+## Requirements
+
+- [Starknet Devnet](https://github.com/0xSpaceShard/starknet-devnet)
+- [Scarb](https://docs.swmansion.com/scarb/docs)
+- [NodeJS](https://nodejs.org/en/)
+- [Cairo](https://cairo-book.github.io/ch01-01-installation.html) (favor building from main branch)
+
 ## How to use
 
 1. Clone this repository
 2. Install dependencies: `npm install`
 3. Write your contracts as a Scarb package under the `src/` directory
 4. Write your tests under the `test/` directory
-5. Compile your contracts using `scarb_build`.
-6. Start a starknet-devnet instance with your local compiler version and the seed `42`:
+5. Write your unit tests (ran with `cairo-test`) in `test/cairo-test`
+6. Generate the vanilla cairo-project architecture by running `scarb run gen-project`
+7. Run your unit tests using `scarb run test-cairo`
+8. Compile your contracts using `scarb_build`.
+9. Start a starknet-devnet instance with your local compiler version and the seed `42`:
 
 ```bash
 starknet-devnet --cairo-compiler-manifest ~/path/to/cairo/Cargo.toml --seed 42
 ```
 
-7. Run your tests: `npm test`
+10. Run your tests: `scarb run test-devnet`
