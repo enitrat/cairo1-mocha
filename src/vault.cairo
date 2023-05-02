@@ -5,6 +5,7 @@ trait IVault {
     fn deposit(amount: u256);
     fn withdraw(shares: u256);
     fn balance_of(account: ContractAddress) -> u256;
+    fn total_supply() -> u256;
 }
 
 #[contract]
