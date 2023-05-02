@@ -10,13 +10,18 @@ trait IVault {
 
 #[contract]
 mod Vault {
-    use openzeppelin::token::erc20::IERC20;
-    use openzeppelin::token::erc20::IERC20Dispatcher;
-    use openzeppelin::token::erc20::IERC20DispatcherTrait;
+    // use openzeppelin::token::erc20::IERC20;
+    // use openzeppelin::token::erc20::IERC20Dispatcher;
+    // use openzeppelin::token::erc20::IERC20DispatcherTrait;
+
+    use simple_vault::erc20::IERC20;
+    use simple_vault::erc20::IERC20Dispatcher;
+    use simple_vault::erc20::IERC20DispatcherTrait;
     use starknet::ContractAddress;
     use starknet::get_caller_address;
     use starknet::get_contract_address;
     use traits::Into;
+    use debug::PrintTrait;
 
     struct Storage {
         _token: ContractAddress,
@@ -60,7 +65,6 @@ mod Vault {
         // (T - s) / T = (B - a) / B
 
         // a = sB / T
-
         let amount: u256 = (shares * _erc20_dispatcher().balance_of(get_contract_address()))
             / _total_supply::read();
         _burn(get_caller_address(), shares);
